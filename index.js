@@ -18,7 +18,6 @@ const mqttClient = mqtt.connect("mqtts://eb4d5208a7ea4b5ea2269b63abb4237c.s1.eu.
 const TOPICS = ["IoT/OutDoor", "IoT/InDoor"];
 
 async function setupMqttAndMongo() {
-    console.log(client)
     try {
         console.log("Attempting to connect to MongoDB...");
         await client.connect();
