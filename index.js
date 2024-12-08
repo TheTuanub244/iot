@@ -5,7 +5,7 @@ const { MongoClient } = require('mongodb');
 const mongoUri = process.env.MONGO_URI || "mongodb+srv://anhtdh250603:1ar12lanwVpaLpSK@cluster0.wkegb.mongodb.net/?retryWrites=true&w=majority&tls=true&appName=Cluster0";
 
 const client = new MongoClient(mongoUri, {
-    serverSelectionTimeoutMS: 7000, 
+    serverSelectionTimeoutMS: 10000, 
     socketTimeoutMS: 45000,
 });
 
@@ -18,6 +18,7 @@ const mqttClient = mqtt.connect("mqtts://eb4d5208a7ea4b5ea2269b63abb4237c.s1.eu.
 const TOPICS = ["IoT/OutDoor", "IoT/InDoor"];
 
 async function setupMqttAndMongo() {
+    console.log(mongoUri)
     try {
         console.log("Attempting to connect to MongoDB...");
         await client.connect();
