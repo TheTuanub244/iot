@@ -5,22 +5,11 @@
       "use": "@vercel/node"
     }
   ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "index.js"
-      }
-    ],
-    "build": {
-    "env": {
-      "NODE_ENV": "production"
-    },
-    "commands": {
-      "install": "npm install",
-      "build": "echo 'No build step required'", 
-      "dev": "npm run dev"  
-    }
+  "env": {
+    "NODE_ENV": "production"
   },
-    "outputDirectory": "dist"
+    "installCommand": "npm install", 
+  "buildCommand": "echo 'No build step required'", 
+  "outputDirectory": "dist"
   }
   
