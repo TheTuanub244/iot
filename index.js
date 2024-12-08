@@ -27,19 +27,18 @@ async function setupMqttAndMongo() {
           }).catch((error) => {
             console.error('Error connecting to MongoDB:', error);
           });
-        console.log(123)
-        console.log(client)
-        // const database = client.db("iotData");
-        // mqttClient.on('connect', () => {
-        //     console.log('Connected to HiveMQ');
-        //     mqttClient.subscribe(TOPICS, (err) => {
-        //         if (!err) {
-        //             console.log(`Subscribed to topics: ${TOPICS.join(', ')}`);
-        //         } else {
-        //             console.error("Subscription error:", err);
-        //         }
-        //     });
-        // });
+  
+        const database = client.db("iotData");
+        mqttClient.on('connect', () => {
+            console.log('Connected to HiveMQ');
+            mqttClient.subscribe(TOPICS, (err) => {
+                if (!err) {
+                    console.log(`Subscribed to topics: ${TOPICS.join(', ')}`);
+                } else {
+                    console.error("Subscription error:", err);
+                }
+            });
+        });
 
         // mqttClient.on('message', async (topic, message) => {
         //     console.log(`Received message on topic ${topic}: ${message.toString()}`);
