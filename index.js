@@ -20,43 +20,44 @@ const TOPICS = ["IoT/OutDoor", "IoT/InDoor"];
 async function setupMqttAndMongo() {
     try {
         console.log("Attempting to connect to MongoDB...");
-        // await mongoose.connect(process.env.MONGO_URI || 'mongodb+srv://tuanub244:AtOePUkyLEbKvv16@it4409.0ybva.mongodb.net/?retryWrites=true&w=majority&appName=it4409', {
-        //     serverSelectionTimeoutMS: 7000,
-        //   }).then(() => {
-        //     console.log('Connected to MongoDB');
-        //   }).catch((error) => {
-        //     console.error('Error connecting to MongoDB:', error);
-        //   });
+        const client = await mongoose.connect(process.env.MONGO_URI || 'mongodb+srv://tuanub244:AtOePUkyLEbKvv16@it4409.0ybva.mongodb.net/?retryWrites=true&w=majority&appName=it4409', {
+            serverSelectionTimeoutMS: 7000,
+          }).then(() => {
+            console.log('Connected to MongoDB');
+          }).catch((error) => {
+            console.error('Error connecting to MongoDB:', error);
+          });
         console.log(123)
-        const database = client.db("iotData");
-        mqttClient.on('connect', () => {
-            console.log('Connected to HiveMQ');
-            mqttClient.subscribe(TOPICS, (err) => {
-                if (!err) {
-                    console.log(`Subscribed to topics: ${TOPICS.join(', ')}`);
-                } else {
-                    console.error("Subscription error:", err);
-                }
-            });
-        });
+        console.log(client)
+        // const database = client.db("iotData");
+        // mqttClient.on('connect', () => {
+        //     console.log('Connected to HiveMQ');
+        //     mqttClient.subscribe(TOPICS, (err) => {
+        //         if (!err) {
+        //             console.log(`Subscribed to topics: ${TOPICS.join(', ')}`);
+        //         } else {
+        //             console.error("Subscription error:", err);
+        //         }
+        //     });
+        // });
 
-        mqttClient.on('message', async (topic, message) => {
-            console.log(`Received message on topic ${topic}: ${message.toString()}`);
-            try {
-                const data = JSON.parse(message.toString());
-                console.log("Parsed data:", data);
-                const collectionName = topic.replace(/\//g, "_");
-                const collection = database.collection(collectionName);
-                await collection.insertOne(data);
-                console.log(`Data stored in MongoDB collection "${collectionName}":`, data);
-            } catch (err) {
-                console.error("Failed to store data:", err);
-            }
-        });
+        // mqttClient.on('message', async (topic, message) => {
+        //     console.log(`Received message on topic ${topic}: ${message.toString()}`);
+        //     try {
+        //         const data = JSON.parse(message.toString());
+        //         console.log("Parsed data:", data);
+        //         const collectionName = topic.replace(/\//g, "_");
+        //         const collection = database.collection(collectionName);
+        //         await collection.insertOne(data);
+        //         console.log(`Data stored in MongoDB collection "${collectionName}":`, data);
+        //     } catch (err) {
+        //         console.error("Failed to store data:", err);
+        //     }
+        // });
 
-        mqttClient.on('error', (err) => {
-            console.error("MQTT client error:", err);
-        });
+        // mqttClient.on('error', (err) => {
+        //     console.error("MQTT client error:", err);
+        // });
         
     } catch (error) {
         console.error("Error connecting to MongoDB:", error);
