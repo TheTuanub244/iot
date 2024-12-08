@@ -1,0 +1,25 @@
+{
+  "name": "deploy_nodejs_vercel",
+  "version": "1.0.0",
+  "description": "A Node.js app deployed to Vercel",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build": "echo 'No build step required'",
+    "vercel-build": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongodb": "^6.10.0",
+    "mqtt": "^5.10.1",
+    "uuid": "^11.0.3"
+  },
+
+    "scripts": {
+       "build": "npm run build && mv ./dist ./public"
+    }
+}
