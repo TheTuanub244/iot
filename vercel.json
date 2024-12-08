@@ -7,6 +7,11 @@
   ],
   "routes": [
     { "src": "/(.*)", "dest": "/" }
-  ]
+  ],
+  "env": {
+    "MONGO_URI": "mongodb+srv://<username>:<password>@cluster0.mongodb.net/?retryWrites=true&w=majority",
+    "MQTT_USERNAME": "your_mqtt_username",
+    "MQTT_PASSWORD": "your_mqtt_password"
+  }
 }
   
