@@ -2,7 +2,7 @@ require('dotenv').config();
 const mqtt = require('mqtt');
 const { MongoClient } = require('mongodb');
 
-const mongoUri = process.env.MONGO_URI || "mongodb+srv://tuanub244:AtOePUkyLEbKvv16@it4409.0ybva.mongodb.net/?retryWrites=true&w=majority&appName=it4409";
+const mongoUri = process.env.MONGO_URI || "mongodb+srv://vercel-admin-user:fUMbRXDPALiyi43s@cluster0.jin5c.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 const client = new MongoClient(mongoUri, {
     serverSelectionTimeoutMS: 30000  
