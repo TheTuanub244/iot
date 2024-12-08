@@ -20,25 +20,18 @@ const TOPICS = ["IoT/OutDoor", "IoT/InDoor"];
 async function setupMqttAndMongo() {
     try {
         connectDB();
-        // const client = await mongoose.connect(process.env.MONGO_URI || 'mongodb+srv://tuanub244:AtOePUkyLEbKvv16@it4409.0ybva.mongodb.net/?retryWrites=true&w=majority&appName=it4409', {
-        //     serverSelectionTimeoutMS: 7000,
-        //   }).then(() => {
-        //     console.log('Connected to MongoDB');
-        //   }).catch((error) => {
-        //     console.error('Error connecting to MongoDB:', error);
-        //   });
   
         // const database = client.db("iotData");
-        // mqttClient.on('connect', () => {
-        //     console.log('Connected to HiveMQ');
-        //     mqttClient.subscribe(TOPICS, (err) => {
-        //         if (!err) {
-        //             console.log(`Subscribed to topics: ${TOPICS.join(', ')}`);
-        //         } else {
-        //             console.error("Subscription error:", err);
-        //         }
-        //     });
-        // });
+        mqttClient.on('connect', () => {
+            console.log('Connected to HiveMQ');
+            mqttClient.subscribe(TOPICS, (err) => {
+                if (!err) {
+                    console.log(`Subscribed to topics: ${TOPICS.join(', ')}`);
+                } else {
+                    console.error("Subscription error:", err);
+                }
+            });
+        });
 
         // mqttClient.on('message', async (topic, message) => {
         //     console.log(`Received message on topic ${topic}: ${message.toString()}`);
