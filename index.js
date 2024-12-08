@@ -4,7 +4,7 @@ const express = require("express");
 const mqtt = require('mqtt');
 const { MongoClient } = require('mongodb');
 const mongoose = require('mongoose')
-const mongoUri = process.env.MONGO_URI || "mongodb+srv://tuanub244:AtOePUkyLEbKvv16@it4409.0ybva.mongodb.net/?retryWrites=true&w=majority&appName=it4409";
+const mongoUri = process.env.MONGODB_URI || "mongodb+srv://tuanub244:AtOePUkyLEbKvv16@it4409.0ybva.mongodb.net/?retryWrites=true&w=majority&appName=it4409";
 
 const app = express()
 app.use(express.json());
@@ -20,7 +20,6 @@ const TOPICS = ["IoT/OutDoor", "IoT/InDoor"];
 async function setupMqttAndMongo() {
     try {
         connectDB();
-        console.log(123)
         // const client = await mongoose.connect(process.env.MONGO_URI || 'mongodb+srv://tuanub244:AtOePUkyLEbKvv16@it4409.0ybva.mongodb.net/?retryWrites=true&w=majority&appName=it4409', {
         //     serverSelectionTimeoutMS: 7000,
         //   }).then(() => {
