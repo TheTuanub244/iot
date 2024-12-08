@@ -1,14 +1,13 @@
 require('dotenv').config();
-const express = require("express");
-
 const mqtt = require('mqtt');
 const { MongoClient } = require('mongodb');
-const mongoose = require('mongoose')
-const mongoUri = process.env.MONGODB_URI || "mongodb+srv://tuanub244:AtOePUkyLEbKvv16@it4409.0ybva.mongodb.net/?retryWrites=true&w=majority&appName=it4409";
 
-const app = express()
-app.use(express.json());
-const connectDB = require("./connectMongoDB");
+const mongoUri = process.env.MONGO_URI || "mongodb+srv://tuanub244:AtOePUkyLEbKvv16@it4409.0ybva.mongodb.net/?retryWrites=true&w=majority&appName=it4409";
+
+const client = new MongoClient(mongoUri, {
+    serverSelectionTimeoutMS: 10000 
+});
+
 const mqttClient = mqtt.connect("mqtts://eb4d5208a7ea4b5ea2269b63abb4237c.s1.eu.hivemq.cloud:8883", {
     username: process.env.MQTT_USERNAME || 'a',
     password: process.env.MQTT_PASSWORD || 'a',
@@ -19,19 +18,21 @@ const TOPICS = ["IoT/OutDoor", "IoT/InDoor"];
 
 async function setupMqttAndMongo() {
     try {
-        connectDB();
-  
-        // const database = client.db("iotData");
-        mqttClient.on('connect', () => {
-            console.log('Connected to HiveMQ');
-            mqttClient.subscribe(TOPICS, (err) => {
-                if (!err) {
-                    console.log(`Subscribed to topics: ${TOPICS.join(', ')}`);
-                } else {
-                    console.error("Subscription error:", err);
-                }
-            });
-        });
+        // console.log("Attempting to connect to MongoDB...");
+        await client.connect();
+        console.log("Connected to MongoDB");
+        const database = client.db("iotData");
+        console.log(database)
+        // mqttClient.on('connect', () => {
+        //     console.log('Connected to HiveMQ');
+        //     mqttClient.subscribe(TOPICS, (err) => {
+        //         if (!err) {
+        //             console.log(`Subscribed to topics: ${TOPICS.join(', ')}`);
+        //         } else {
+        //             console.error("Subscription error:", err);
+        //         }
+        //     });
+        // });
 
         // mqttClient.on('message', async (topic, message) => {
         //     console.log(`Received message on topic ${topic}: ${message.toString()}`);
