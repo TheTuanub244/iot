@@ -5,8 +5,7 @@ const { MongoClient } = require('mongodb');
 const mongoUri = process.env.MONGO_URI || "mongodb+srv://anhtdh250603:1ar12lanwVpaLpSK@cluster0.wkegb.mongodb.net/?retryWrites=true&w=majority&tls=true&appName=Cluster0";
 
 const client = new MongoClient(mongoUri, {
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 5000, 
+    serverSelectionTimeoutMS: 7000, 
     socketTimeoutMS: 45000,
 });
 
