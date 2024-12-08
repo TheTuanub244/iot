@@ -20,15 +20,14 @@ const TOPICS = ["IoT/OutDoor", "IoT/InDoor"];
 async function setupMqttAndMongo() {
     try {
         console.log("Attempting to connect to MongoDB...");
-        await mongoose.connect(process.env.MONGO_URI || 'mongodb+srv://tuanub244:AtOePUkyLEbKvv16@it4409.0ybva.mongodb.net/?retryWrites=true&w=majority&appName=it4409', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            serverSelectionTimeoutMS: 5000,
-          }).then(() => {
-            console.log('Connected to MongoDB');
-          }).catch((error) => {
-            console.error('Error connecting to MongoDB:', error);
-          });
+        // await mongoose.connect(process.env.MONGO_URI || 'mongodb+srv://tuanub244:AtOePUkyLEbKvv16@it4409.0ybva.mongodb.net/?retryWrites=true&w=majority&appName=it4409', {
+        //     serverSelectionTimeoutMS: 7000,
+        //   }).then(() => {
+        //     console.log('Connected to MongoDB');
+        //   }).catch((error) => {
+        //     console.error('Error connecting to MongoDB:', error);
+        //   });
+        console.log(123)
         const database = client.db("iotData");
         mqttClient.on('connect', () => {
             console.log('Connected to HiveMQ');
