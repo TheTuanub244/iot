@@ -22,7 +22,7 @@ async function setupMqttAndMongo() {
         await client.connect();
         console.log("Connected to MongoDB");
         const database = client.db("iotData");
-
+        console.log(database)
         mqttClient.on('connect', () => {
             console.log('Connected to HiveMQ');
             mqttClient.subscribe(TOPICS, (err) => {
